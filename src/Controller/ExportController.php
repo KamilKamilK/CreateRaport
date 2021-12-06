@@ -25,41 +25,42 @@ class ExportController extends AbstractController
     /**
      * @var FormFactoryInterface
      */
-    private $formfactory;
+    private $formFactory;
 
     public function __construct(
         ExportRepository $exportRepository,
         Environment      $twig,
-        FormFactoryInterface $formfactory
+        FormFactoryInterface $formFactory
     )
 
     {
         $this->twig = $twig;
         $this->exportRepository = $exportRepository;
-        $this->formfactory = $formfactory;
+        $this->formFactory = $formFactory;
     }
 
     /**
      * @Route("/", name="export")
      */
-    public function index(Request $request)
+    public function index(Request $request): Response
     {
-        $form = $this->formfactory->create(ExportType::class);
+        $form = $this->formFactory->create(ExportType::class);
         $form->handleRequest($request);
 
         $formParameters= $form->getData();
 
         if($form->isSubmitted() && $form->isValid()){
-            $sortedExports = $this->exportRepository->findDateByParameters(
+            $exports = $this->exportRepository->findDateByParameters(
                 $formParameters['Lokal:']->name,
                 $formParameters['Od:']->format('Y-m-d'),
                 $formParameters['Do:']->format('Y-m-d')
             );
+        } else {
+            $exports = $this->exportRepository->findAll();
         }
-        $exports = $this->exportRepository->findAll();
+
         $html = $this->twig->render('export/index.html.twig', [
             'exports' => $exports,
-            'sortedExports' => $sortedExports,
             'form' => $form->createView()
         ]);
         return new Response($html);

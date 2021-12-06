@@ -46,7 +46,7 @@ class Export
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -54,7 +54,7 @@ class Export
     /**
      * @param string $name
      */
-    public function setName($name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -68,7 +68,7 @@ class Export
     }
 
     /**
-     * @param mixed $time
+     * @param $date
      */
     public function setDate($date): void
     {
@@ -94,7 +94,7 @@ class Export
     /**
      * @return string
      */
-    public function getUser()
+    public function getUser(): string
     {
         return $this->user;
     }

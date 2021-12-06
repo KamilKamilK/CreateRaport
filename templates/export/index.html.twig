@@ -44,7 +44,7 @@
             <th>Użytkownik</th>
             <th>Lokal</th>
         </tr>
-        {% for export in sortedExports %}
+        {% for export in exports %}
             <tr>
                 <td>{{ export.name }}</td>
                 <td>{{ export.date|date("Y/m/d") }}</td>

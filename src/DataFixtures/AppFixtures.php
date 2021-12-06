@@ -15,8 +15,8 @@ class AppFixtures extends Fixture
             $export = new Export();
 
             $export->setName('Test' . rand(0,100));
-            $export->setDate(new \DateTime('2021-01-01' ));
-            $export->setHour(new \DateTime('@'.strtotime('now')));
+            $export->setDate(new DateTime('2021-01-01' ));
+            $export->setHour(new DateTime('@'.strtotime('now')));
             $export->setUser('User ' . rand(0,100));
             $export->setPlaceName('lokal ' . rand(0,100));
 

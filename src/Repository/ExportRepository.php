@@ -19,9 +19,9 @@ class ExportRepository extends ServiceEntityRepository
         parent::__construct($registry, Export::class);
     }
 
-     /**
-      * @return Export Returns an array of Export objects
-      */
+    /**
+     * @return Export Returns an array of Export objects
+     */
     public function findDateByParameters($local, $from, $to)
     {
         return $this->createQueryBuilder('e')
@@ -36,17 +36,4 @@ class ExportRepository extends ServiceEntityRepository
             ->getResult();
 
     }
-
-
-    /*
-    public function findOneBySomeField($value): ?Export
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
