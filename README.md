@@ -3,7 +3,7 @@
 * [Used technogies](#used-technologies)
 * [ENV Symfony](#env-symfony)
 * [Project start](#project-start)
-* [Commands CLI](#commands-cli)
+
 
 ## Project description
 Project was created for recruitment requests. In this application after fullfill form you are going to receive reaport about locals. 
