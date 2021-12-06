@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Export index{% endblock %}
+
+{% block style %}
+    <style>
+        #exports {
+            font-family: Arial, Helvetica, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #exports td, #users th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        #exports th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #04AA6D;
+            color: white;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <h1>Raport</h1>
+    <h2>Wybierz lokal i daty</h2>
+    {{ form_start(form) }}
+
+    {{ form_widget(form) }}
+
+    {{ form_end(form) }}
+
+    <h2>List of exports</h2>
+    <table id="exports"  >
+        <tr>
+
+            <th>Nazwa</th>
+            <th>Data</th>
+            <th>Godzina</th>
+            <th>Użytkownik</th>
+            <th>Lokal</th>
+        </tr>
+        {% for export in sortedExports %}
+            <tr>
+                <td>{{ export.name }}</td>
+                <td>{{ export.date|date("Y/m/d") }}</td>
+                <td>{{ export.hour|date("H:i") }}</td>
+                <td>{{ export.user }}</td>
+                <td>{{ export.placeName }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+
+
+
+{% endblock %}
