@@ -20,11 +20,27 @@ class ExportType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('Lokal:', ChoiceType::class, array(
-            'choices' => $this->locals,
-        ))
-            ->add('Od:', DateType::class)
-            ->add('Do:', DateType::class)
-            ->add('Zatwierdz', SubmitType::class);
+        $placeNames = array();
+        foreach ($this->locals as $key => $local) {
+            $name = $local->getPlaceName();
+            array_push($placeNames, $name);
+
+
+            $builder->add('Lokal:', ChoiceType::class, [
+                'choices' =>$this->locals
+            ])
+                ->add('Od:', DateType::class, [
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd',
+                    'data' => new \DateTime(),
+                ])
+                ->add('Do:', DateType::class, [
+                    'widget' => 'single_text',
+                    'format' => 'yyyy-MM-dd',
+                    'data' => new \DateTime(),
+                ])
+                ->add('Zatwierdz', SubmitType::class);
+        }
     }
+
 }

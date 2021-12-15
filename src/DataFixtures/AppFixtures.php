@@ -11,17 +11,27 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        for ($i=0; $i <10; $i++) {
-            $export = new Export();
+        $dateArray = ['2021-01-01', '2021-02-01','2021-03-01','2021-04-01'];
+        $timeArray = ['10:50', '02:50','06:50','09:43'];
 
-            $export->setName('Test' . rand(0,100));
-            $export->setDate(new DateTime('2021-01-01' ));
-            $export->setHour(new DateTime('@'.strtotime('now')));
-            $export->setUser('User ' . rand(0,100));
-            $export->setPlaceName('lokal ' . rand(0,100));
+            for ($i = 0; $i < 10; $i++) {
+                $export = new Export();
 
-            $manager->persist($export);
-        }
+                $export->setName('Test' . rand(0, 100));
+                shuffle($dateArray);
+                foreach ($dateArray as $date) {
+                    $export->setDate(new DateTime($date));
+                }
+                shuffle($timeArray);
+                foreach ($timeArray as $time) {
+                    $export->setHour(new DateTime('@' . strtotime($time)));
+                }
+                $export->setUser('User ' . rand(0, 100));
+                $export->setPlaceName('lokal ' . rand(0, 100));
+
+                $manager->persist($export);
+            }
+
 
         $manager->flush();
     }
